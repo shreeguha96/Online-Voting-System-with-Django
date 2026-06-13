@@ -4,7 +4,7 @@ A fully functional REST API built with **Python Django + SQLite** for managing e
 
 ---
 
-## 🚀 Quick Start (Run Locally)
+##  Quick Start - Run Locally
 
 ```bash
 # 1. Clone / unzip and cd into the project
