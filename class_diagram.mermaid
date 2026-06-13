@@ -1,0 +1,112 @@
+classDiagram
+    class Election {
+        +UUID id
+        +String title
+        +String description
+        +DateTime start_date
+        +DateTime end_date
+        +String status
+        +String created_by
+        +Boolean allow_multiple_votes
+        +Boolean is_public_result
+        +DateTime created_at
+        +DateTime updated_at
+        +is_active() bool
+        +total_votes() int
+        +auto_update_status() void
+    }
+
+    class Candidate {
+        +UUID id
+        +String name
+        +String description
+        +String image_url
+        +Integer position
+        +DateTime created_at
+        +vote_count() int
+        +vote_percentage() float
+    }
+
+    class Voter {
+        +UUID id
+        +String voter_id
+        +String name
+        +String email
+        +Boolean is_eligible
+        +DateTime registered_at
+        +has_voted(election) bool
+    }
+
+    class Vote {
+        +UUID id
+        +String ip_address
+        +DateTime voted_at
+    }
+
+    class AuditLog {
+        +UUID id
+        +String action
+        +String actor
+        +JSON details
+        +String ip_address
+        +DateTime timestamp
+    }
+
+    class ElectionViewSet {
+        +list()
+        +create()
+        +retrieve()
+        +update()
+        +destroy()
+        +activate()
+        +close()
+        +results()
+        +voters()
+        +add_candidate()
+    }
+
+    class CandidateViewSet {
+        +list()
+        +create()
+        +retrieve()
+        +update()
+        +destroy()
+    }
+
+    class VoterViewSet {
+        +list()
+        +create()
+        +retrieve()
+        +update()
+        +vote_history()
+        +check_eligibility()
+    }
+
+    class VoteViewSet {
+        +list()
+        +retrieve()
+        +cast()
+    }
+
+    class AuditLogViewSet {
+        +list()
+        +retrieve()
+    }
+
+    class DashboardView {
+        +stats()
+    }
+
+    Election "1" --> "0..*" Candidate : has
+    Voter "1" --> "0..*" Vote : casts
+    Candidate "1" --> "0..*" Vote : receives
+    Election "1" --> "0..*" Vote : contains
+
+    ElectionViewSet ..> Election : manages
+    CandidateViewSet ..> Candidate : manages
+    VoterViewSet ..> Voter : manages
+    VoteViewSet ..> Vote : manages
+    AuditLogViewSet ..> AuditLog : reads
+    DashboardView ..> Election : reads
+    DashboardView ..> Voter : reads
+    DashboardView ..> Vote : reads
