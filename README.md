@@ -94,9 +94,9 @@ curl -X POST http://127.0.0.1:8000/api/votes/cast/ \
 
 ---
 
-## ☁️ Deploy for Free
+## Deployment
 
-### Option 1 – Render (Recommended)
+### Render 
 1. Push code to GitHub
 2. Go to https://render.com → New Web Service
 3. Connect your GitHub repo
@@ -105,30 +105,9 @@ curl -X POST http://127.0.0.1:8000/api/votes/cast/ \
 6. Add env var: `SECRET_KEY` = any random string, `DEBUG` = False
 7. Deploy → Free plan supports SQLite
 
-### Option 2 – Railway
-1. Push to GitHub
-2. Go to https://railway.app → New Project → Deploy from GitHub
-3. Railway auto-detects Django via Procfile
-4. Add `SECRET_KEY` env var
-5. Deploy
-
-### Option 3 – PythonAnywhere (Free Tier)
-1. Sign up at https://www.pythonanywhere.com
-2. Open Bash console, clone repo
-3. Create virtualenv and install requirements
-4. Configure WSGI file to point to `voting_system.wsgi`
-5. Run `python manage.py migrate` in console
-6. Reload the web app
-
----
 
 ## 🔐 Django Admin
 - URL: `/admin/`
 - Create superuser: `python manage.py createsuperuser`
 - Manage all models visually with audit-safe read-only vote records
-
----
-
-## 📊 Class Diagram
-See `class_diagram.mermaid` — paste into https://mermaid.live to render
 
